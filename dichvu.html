@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoalZone | Quản lý sân bóng</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="site-header">
+            <div class="shell header-inner">
+                <a class="brand" href="trangchu.html">
+                    <span class="brand-mark">GZ</span>
+                    <div>
+                        <strong>GoalZone</strong>
+                        <span>Field Management</span>
+                    </div>
+                </a>
+                <nav class="main-nav">
+                    <a class="nav-link" href="trangchu.html">Dashboard</a>
+                    <a class="nav-link active" href="dichvu.html">Sân bóng</a>
+                    <a class="nav-link" href="khachhang.html">Khách hàng</a>
+                    <a class="nav-link" href="thongke.html">Lịch đặt</a>
+                </nav>
+                <div class="header-user">
+                    <span data-admin-role>Quản lý sân bóng</span>
+                    <strong data-admin-name>GoalZone Admin</strong>
+                    <button class="button-ghost" data-logout>Đăng xuất</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="page-main shell">
+            <section class="page-hero compact-hero">
+                <div class="hero-copy">
+                    <span class="eyebrow">Danh mục sân</span>
+                    <h1>Quản lý sân, giá giờ thuê và trạng thái khai thác</h1>
+                    <p>Thêm sân mới, cập nhật khu vực, sức chứa, tiện ích và kiểm soát sân nào đang sẵn sàng hay đang bảo trì.</p>
+                </div>
+            </section>
+
+            <section class="summary-strip">
+                <article class="summary-card"><span>Tổng số sân</span><strong id="fieldTotal">0</strong></article>
+                <article class="summary-card"><span>Sẵn sàng khai thác</span><strong id="fieldAvailable">0</strong></article>
+                <article class="summary-card"><span>Đang bảo trì</span><strong id="fieldMaintenance">0</strong></article>
+                <article class="summary-card"><span>Doanh thu từ sân</span><strong id="fieldRevenue">0 VNĐ</strong></article>
+            </section>
+
+            <section class="content-grid content-grid-large">
+                <article class="panel" id="fieldPanel">
+                    <div class="section-head">
+                        <div>
+                            <span class="eyebrow">Thêm hoặc sửa</span>
+                            <h2 class="section-title">Thông tin sân bóng</h2>
+                        </div>
+                    </div>
+                    <form id="fieldForm" class="form-grid">
+                        <label class="field">
+                            <span>Tên sân</span>
+                            <input type="text" id="fieldName" placeholder="Ví dụ: Sân A1" required>
+                        </label>
+                        <label class="field">
+                            <span>Mã sân</span>
+                            <input type="text" id="fieldCode" placeholder="A1" required>
+                        </label>
+                        <label class="field">
+                            <span>Loại sân</span>
+                            <select id="fieldType">
+                                <option value="Sân 5">Sân 5</option>
+                                <option value="Sân 7">Sân 7</option>
+                                <option value="Sân 11">Sân 11</option>
+                            </select>
+                        </label>
+                        <label class="field">
+                            <span>Mặt sân</span>
+                            <input type="text" id="fieldSurface" placeholder="Cỏ nhân tạo">
+                        </label>
+                        <label class="field">
+                            <span>Giá thuê mỗi giờ</span>
+                            <input type="number" id="fieldHourlyRate" min="0" step="1000" placeholder="0" required>
+                        </label>
+                        <label class="field">
+                            <span>Sức chứa</span>
+                            <input type="number" id="fieldCapacity" min="0" step="1" placeholder="0">
+                        </label>
+                        <label class="field">
+                            <span>Trạng thái</span>
+                            <select id="fieldStatus">
+                                <option value="available">Sẵn sàng</option>
+                                <option value="maintenance">Bảo trì</option>
+                                <option value="inactive">Tạm ẩn</option>
+                            </select>
+                        </label>
+                        <label class="field">
+                            <span>Khu vực</span>
+                            <input type="text" id="fieldLocation" placeholder="Khu A, tầng trệt...">
+                        </label>
+                        <label class="field field-span-2">
+                            <span>Tiện ích</span>
+                            <input type="text" id="fieldAmenities" placeholder="Đèn LED, wifi, khán đài, phòng thay đồ...">
+                        </label>
+                        <label class="field field-span-2">
+                            <span>Ghi chú vận hành</span>
+                            <textarea id="fieldNotes" rows="4" placeholder="Ghi chú về khung giờ cao điểm, hạn chế hoặc lưu ý khi khai thác"></textarea>
+                        </label>
+                        <div class="button-row field-span-2">
+                            <button type="submit" class="button-primary"><span id="fieldSubmitLabel">Lưu sân</span></button>
+                            <button type="button" class="button-secondary" id="cancelFieldEdit" style="display:none;">Hủy chỉnh sửa</button>
+                        </div>
+                    </form>
+                </article>
+
+                <article class="panel">
+                    <div class="section-head">
+                        <div>
+                            <span class="eyebrow">Lọc dữ liệu</span>
+                            <h2 class="section-title">Tìm kiếm nhanh</h2>
+                        </div>
+                    </div>
+                    <div class="filters-grid">
+                        <label class="field">
+                            <span>Từ khóa</span>
+                            <input type="text" id="fieldSearch" placeholder="Tên sân, mã sân, khu vực...">
+                        </label>
+                        <label class="field">
+                            <span>Loại sân</span>
+                            <select id="fieldTypeFilter">
+                                <option value="">Tất cả</option>
+                                <option value="Sân 5">Sân 5</option>
+                                <option value="Sân 7">Sân 7</option>
+                                <option value="Sân 11">Sân 11</option>
+                            </select>
+                        </label>
+                        <label class="field">
+                            <span>Trạng thái</span>
+                            <select id="fieldStatusFilter">
+                                <option value="">Tất cả</option>
+                                <option value="available">Sẵn sàng</option>
+                                <option value="maintenance">Bảo trì</option>
+                                <option value="inactive">Tạm ẩn</option>
+                            </select>
+                        </label>
+                        <label class="field">
+                            <span>Sắp xếp</span>
+                            <select id="fieldSort">
+                                <option value="newest">Mới nhất</option>
+                                <option value="rate-desc">Giá cao đến thấp</option>
+                                <option value="rate-asc">Giá thấp đến cao</option>
+                                <option value="bookings">Lượt đặt nhiều</option>
+                                <option value="name">Tên A-Z</option>
+                            </select>
+                        </label>
+                    </div>
+                </article>
+            </section>
+
+            <section class="panel">
+                <div class="section-head">
+                    <div>
+                        <span class="eyebrow">Danh sách sân</span>
+                        <h2 class="section-title">Sân bóng hiện có</h2>
+                    </div>
+                </div>
+                <div class="table-shell">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Sân</th>
+                                <th>Khu vực</th>
+                                <th>Loại và mặt sân</th>
+                                <th>Giá thuê</th>
+                                <th>Trạng thái</th>
+                                <th>Lượt đặt</th>
+                                <th>Doanh thu</th>
+                                <th>Lịch tới</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fieldTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/store.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dichvu.js"></script>
+</body>
+</html>

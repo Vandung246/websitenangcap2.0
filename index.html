@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoalZone | Đăng nhập quản lý sân bóng</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-page">
+    <main class="login-wrap">
+        <section class="login-layout">
+            <aside class="login-side">
+                <span class="eyebrow">GoalZone Booking</span>
+                <h1>Quản lý sân bóng, khách đặt và lịch thi đấu trên một hệ thống duy nhất.</h1>
+                <p>Mọi dữ liệu được lưu trực tiếp bằng localStorage, vì vậy sân, khách hàng và lịch đặt vẫn còn sau khi tải lại trang.</p>
+
+                <div class="login-stats">
+                    <article class="login-stat">
+                        <span>Doanh thu dự kiến</span>
+                        <strong id="previewRevenue">0 VNĐ</strong>
+                    </article>
+                    <article class="login-stat">
+                        <span>Lịch đang hoạt động</span>
+                        <strong id="previewBookings">0</strong>
+                    </article>
+                    <article class="login-stat">
+                        <span>Tổng số sân</span>
+                        <strong id="previewFields">0</strong>
+                    </article>
+                </div>
+            </aside>
+
+            <section class="login-box">
+                <div class="login-header">
+                    <div class="brand brand-login">
+                        <span class="brand-mark">GZ</span>
+                        <div>
+                            <strong>GoalZone Admin</strong>
+                            <span>Hệ thống quản lý sân bóng</span>
+                        </div>
+                    </div>
+                    <h2>Đăng nhập</h2>
+                    <p id="demoAccount"></p>
+                </div>
+
+                <form id="loginForm" class="login-form">
+                    <label class="field">
+                        <span>Tên đăng nhập</span>
+                        <input type="text" id="username" placeholder="admin123" required>
+                    </label>
+                    <label class="field">
+                        <span>Mật khẩu</span>
+                        <input type="password" id="password" placeholder="12345" required>
+                    </label>
+                    <button type="submit" class="button-primary wide-button">Đăng nhập vào hệ thống</button>
+                    <div id="errorMessage" class="error-message"></div>
+                </form>
+            </section>
+        </section>
+    </main>
+
+    <script src="js/store.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
